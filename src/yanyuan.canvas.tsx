@@ -302,7 +302,7 @@ export default function YanyuanFoodGuide(){
   }
   return <main className="ys" style={style}>
     <div className="ys-shell">
-      <header className="ys-top"><div className="ys-brand"><span className="ys-mark">食</span><span>燕园饭点编辑部</span></div><div className="ys-topright"><span className="ys-mono ys-topmeta">YANYUAN FOOD NOTES / NO. 01</span><div className="ys-author"><img className="ys-avatar" src={authorAvatar} alt="作者头像" width={42} height={42}/><span className="ys-byline"><strong>作者</strong><small>个人试吃手记</small></span></div></div></header>
+      <header className="ys-top"><div className="ys-brand"><span className="ys-mark">食</span><span>燕园饭点编辑部</span></div><div className="ys-topright"><span className="ys-mono ys-topmeta">YANYUAN FOOD NOTES / NO. 01</span><div className="ys-author"><img className="ys-avatar" src={authorAvatar} alt="作者头像" width={42} height={42}/><span className="ys-byline"><strong>灰皂沫.🛁</strong><small>个人试吃手记</small></span></div></div></header>
       <section className="ys-hero" aria-labelledby="ys-title">
         <div className="ys-copy"><div className="ys-kicker">个人试吃档案 · 第一期</div><h1 id="ys-title">燕园美食<br/><em>红黑榜</em></h1>
         <p className="ys-deck">从「我溺爱」到「拉完了」。<br/>哪些值得专门跑一趟，哪些再火也不回购？</p>
