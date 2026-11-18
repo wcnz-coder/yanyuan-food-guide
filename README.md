@@ -24,3 +24,5 @@ npm test
 项目代码采用 [MIT](./LICENSE) 许可。作者头像与试吃文字不随代码许可授权。
 
 标题字体 Yanyuan Notes 是[小赖字体](https://github.com/lxgw/kose-font)的网页字形子集，按 [SIL OFL 1.1](./assets/OFL-YanyuanNotes.txt) 分发，并内嵌在离线页面中。
+
+正文使用[霞鹜文楷轻便版](https://github.com/lxgw/LxgwWenKai-Lite)的网页子集 Yanyuan Reading，按 [SIL OFL 1.1](./assets/OFL-YanyuanReading.txt) 分发，也内嵌在离线页面中。

@@ -6,8 +6,12 @@ const root=path.resolve(__dirname,'..');
   const src=await fs.readFile(path.join(root,'src','yanyuan.canvas.tsx'),'utf8');
   const skin=await fs.readFile(path.join(root,'src','paper-theme.css'),'utf8');
   const notes=(await fs.readFile(path.join(root,'assets','yanyuan-notes.woff2'))).toString('base64');
-  const notesLicense=await fs.readFile(path.join(root,'assets','OFL-YanyuanNotes.txt'),'utf8');
-  const typeStyle='@font-face{font-family:"Yanyuan Notes";src:url(data:font/woff2;base64,'+notes+') format("woff2");font-style:normal;font-weight:400;font-display:swap}';
+  const reading=(await fs.readFile(path.join(root,'assets','yanyuan-reading.woff2'))).toString('base64');
+  const license=async name=>(await fs.readFile(path.join(root,'assets',name),'utf8')).replace(/[ \t]+$/gm,'').replace(/-->/g,'--&gt;');
+  const notesLicense=await license('OFL-YanyuanNotes.txt');
+  const readingLicense=await license('OFL-YanyuanReading.txt');
+  const face=(name,encoded)=>'@font-face{font-family:"'+name+'";src:url(data:font/woff2;base64,'+encoded+') format("woff2");font-style:normal;font-weight:400;font-display:swap}';
+  const typeStyle=face('Yanyuan Notes',notes)+'\n'+face('Yanyuan Reading',reading);
   const avatar=src.includes('__YANYUAN_AUTHOR_AVATAR__')?'data:image/jpeg;base64,'+(await fs.readFile(path.join(root,'assets','author-avatar.jpg'))).toString('base64'):'';
   const result=await build({
     absWorkingDir:root, stdin:{contents:"import React from 'react';import {createRoot} from 'react-dom/client';import App from './src/yanyuan.canvas.tsx';createRoot(document.querySelector('#root')).render(React.createElement(App));",resolveDir:root,loader:'jsx'},
@@ -31,7 +35,7 @@ const root=path.resolve(__dirname,'..');
     }}]
   });
   const js=result.outputFiles[0].text.replace(/<\/script/gi,'<\\/script');
-  const html='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>燕园美食红黑榜｜燕园饭点编辑部</title><!-- Yanyuan Notes: subset of Xiaolai.\n'+notesLicense.replace(/-->/g,'--&gt;')+'\n--><style>html,body,#root{margin:0;min-height:100%;background:#fbf7e9}html{scroll-behavior:smooth} @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}\n'+typeStyle+'\n'+skin+'</style></head><body><div id="root"></div><noscript>请启用 JavaScript 查看交互榜单。</noscript><script>'+js+'</script></body></html>';
+  const html='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>燕园美食红黑榜｜燕园饭点编辑部</title><!-- Yanyuan Notes: subset of Xiaolai.\n'+notesLicense+'\nYanyuan Reading: subset of LXGW WenKai Lite.\n'+readingLicense+'\n--><style>html,body,#root{margin:0;min-height:100%;background:#fbf7e9}html{scroll-behavior:smooth} @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}\n'+typeStyle+'\n'+skin+'</style></head><body><div id="root"></div><noscript>请启用 JavaScript 查看交互榜单。</noscript><script>'+js+'</script></body></html>';
   const out=path.join(root,'.build','interactive.html');
   await fs.mkdir(path.dirname(out),{recursive:true});
   await fs.writeFile(out,html,'utf8');

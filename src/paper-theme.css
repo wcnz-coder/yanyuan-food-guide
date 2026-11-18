@@ -448,7 +448,7 @@ main.ys { background: #fffbf2; color: var(--roast-ink); }
   .ys .ys-card h3 { font-size: 19px; }
 }
 
-/* Handwritten headings; keep reviews and controls in the reading face. */
+/* Handwritten headings, Kai prose, and sans-serif controls. */
 .ys { --notes-face: "Yanyuan Notes", var(--roundface); }
 .ys .ys-brand,
 .ys .ys-hero h1,
@@ -468,3 +468,10 @@ main.ys { background: #fffbf2; color: var(--roast-ink); }
 .ys .ys-hero h1 em {
   -webkit-text-stroke: .011em currentColor;
 }
+.ys :is(.ys-deck,.ys-quote,.ys-detail,.ys-special small,.ys-pick small,.ys-footer > span:first-child) {
+  font-family: "Yanyuan Reading","Kaiti SC",KaiTi,serif;
+  line-height: 1.7;
+}
+.ys :is(.ys-deck,.ys-quote,.ys-detail) { font-size: 16px; }
+.ys .ys-quote { font-weight: 600; }
+.ys :is(.ys-special small,.ys-pick small,.ys-footer > span:first-child) { font-size: 14px; }
