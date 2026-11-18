@@ -447,3 +447,22 @@ main.ys { background: #fffbf2; color: var(--roast-ink); }
   .ys .ys-top { gap: 6px; }
   .ys .ys-card h3 { font-size: 19px; }
 }
+
+/* Rounded display type only; reviews and filter controls stay in the reading face. */
+.ys { --bubble-face: "Yanyuan Bubble", var(--roundface); }
+.ys .ys-brand,
+.ys .ys-hero h1,
+.ys .ys-heading h2,
+.ys .ys-special strong,
+.ys .ys-card h3,
+.ys .ys-reading-tier > h3 {
+  font-family: var(--bubble-face);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.ys .ys-hero h1 { line-height: 1.14; }
+.ys .ys-hero h1 em {
+  paint-order: stroke fill;
+  -webkit-text-stroke: .045em #fff8df;
+  text-shadow: 0 .035em 0 #fed385;
+}
