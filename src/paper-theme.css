@@ -150,3 +150,97 @@
   .ys .ys-heading .ys-mono { font-size: 11px; letter-spacing: .035em; }
   .ys .ys-search input, .ys .ys-select { font-size: 16px; }
 }
+
+/* Yanyuan cafeteria sticker sheet. Decorative only; no external assets. */
+.ys {
+  --sticker-rice: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23674b5c%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20fill%3D%22%23fff4d9%22%20d%3D%22M15%2036a13%2013%200%200%201%202-15%2012%2012%200%200%201%2014-7c8-4%2017%202%2018%2010%205%205%205%2011%201%2015z%22%2F%3E%3Cpath%20fill%3D%22%23f39792%22%20d%3D%22M10%2034h44v4a19%2019%200%200%201-17%2017H27a19%2019%200%200%201-17-17z%22%2F%3E%3Cpath%20d%3D%22M26%2041v2m12-2v2m-9%203q3%203%206%200M21%2013l-4-5m15%202V4m12%208%204-5%22%2F%3E%3Cpath%20fill%3D%22%23db6980%22%20stroke%3D%22none%22%20d%3D%22M20%2046h4v3h-4zm20%200h4v3h-4z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --sticker-bao: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23674b5c%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20fill%3D%22%23ffe0bf%22%20d%3D%22M8%2039c0-10%207-18%2014-21%202-1%206-6%207-8l4%204%204-3%205%207c9%204%2014%2011%2014%2022%200%2010-9%2014-24%2014S8%2050%208%2039z%22%2F%3E%3Cpath%20opacity%3D%22.66%22%20d%3D%22m26%2019%203%207m9-7-3%207m-13-4-1%204m21-4%202%204%22%2F%3E%3Cpath%20d%3D%22M25%2035v2m14-2v2m-11%205q4%204%208%200%22%2F%3E%3Cellipse%20fill%3D%22%23ef8990%22%20stroke%3D%22none%22%20cx%3D%2220%22%20cy%3D%2243%22%20rx%3D%224%22%20ry%3D%222.4%22%2F%3E%3Cellipse%20fill%3D%22%23ef8990%22%20stroke%3D%22none%22%20cx%3D%2244%22%20cy%3D%2243%22%20rx%3D%224%22%20ry%3D%222.4%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --sticker-milk: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23674b5c%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20fill%3D%22%23b9d6f5%22%20d%3D%22M14%2024h34v32H14z%22%2F%3E%3Cpath%20fill%3D%22%23fff7de%22%20d%3D%22m14%2024%208-12h20l6%2012zM22%207h20v5H22z%22%2F%3E%3Cpath%20fill%3D%22%23e8f2ff%22%20d%3D%22m42%2012%206%2012v32h7V24L48%2012z%22%2F%3E%3Cpath%20d%3D%22M23%2036v2m11-2v2m-9%205q4%203%207%200%22%2F%3E%3Cpath%20fill%3D%22%23ee929b%22%20stroke%3D%22none%22%20d%3D%22M19%2042h4v3h-4zm16%200h4v3h-4z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --sticker-pudding: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23674b5c%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20fill%3D%22%23fbdc91%22%20d%3D%22M21%2018h22l10%2029H11z%22%2F%3E%3Cpath%20fill%3D%22%23d69b66%22%20d%3D%22M21%2018c0-4%2022-4%2022%200l3%209c-4%201-6-4-9-2-4%205-6-1-9%201-4%203-7%200-10%201z%22%2F%3E%3Cpath%20fill%3D%22%23f2b7c2%22%20d%3D%22M7%2047h50c-2%207-12%2010-25%2010S9%2054%207%2047z%22%2F%3E%3Cpath%20d%3D%22M25%2034v2m14-2v2m-10%205q3%203%206%200m-4-26%202-8%22%2F%3E%3Ccircle%20fill%3D%22%23e5828d%22%20cx%3D%2236%22%20cy%3D%228%22%20r%3D%224%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --sticker-star: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23674b5c%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20fill%3D%22%23ffe089%22%20d%3D%22m32%207%207%2015%2017%203-12%2012%202%2017-14-8-15%208%203-17L8%2025l17-3z%22%2F%3E%3Cpath%20d%3D%22M25%2030v2m14-2v2m-10%205q3%203%206%200%22%2F%3E%3Cpath%20fill%3D%22%23f28f89%22%20stroke%3D%22none%22%20d%3D%22M19%2035h5v3h-5zm21%200h5v3h-5z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --sticker-heart: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23674b5c%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20fill%3D%22%23f6a6b7%22%20d%3D%22M32%2053C22%2047%208%2037%208%2024c0-12%2015-16%2024-6%209-10%2024-6%2024%206%200%2013-14%2023-24%2029z%22%2F%3E%3Cpath%20d%3D%22M25%2027v2m14-2v2m-10%206q3%203%206%200%22%2F%3E%3Cpath%20fill%3D%22%23ffe7ca%22%20stroke%3D%22none%22%20d%3D%22M19%2033h5v3h-5zm21%200h5v3h-5z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --sticker-onigiri: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23674b5c%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20fill%3D%22%23fff6dc%22%20d%3D%22M24%2013q8-9%2016%200l16%2027q6%2012-7%2013H15Q2%2052%208%2041z%22%2F%3E%3Cpath%20fill%3D%22%23a6c6a6%22%20d%3D%22M23%2040q9-3%2018%200v13H23z%22%2F%3E%3Cpath%20d%3D%22M25%2028v2m14-2v2m-10%205q3%203%206%200%22%2F%3E%3Cpath%20fill%3D%22%23ef8c98%22%20stroke%3D%22none%22%20d%3D%22M19%2033h5v3h-5zm21%200h5v3h-5z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --sticker-ticket: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23674b5c%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20fill%3D%22%23c6c9ef%22%20d%3D%22M8%2017h48v11c-8%200-8%209%200%209v10H8V37c8%200%208-9%200-9z%22%2F%3E%3Cpath%20d%3D%22M42%2021v3m0%205v3m0%205v3m-22-10v2m12-2v2m-8%205q2%203%205%200%22%2F%3E%3Cpath%20fill%3D%22%23f38faa%22%20stroke%3D%22none%22%20d%3D%22M15%2035h4v3h-4zm19%200h4v3h-4z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --sticker-shadow: drop-shadow(0 2px 0 #fff9ee) drop-shadow(0 2px 2px #70557033);
+}
+
+.ys .ys-brand::after {
+  content: ""; flex: none; width: 26px; height: 26px;
+  background: var(--sticker-rice) center / contain no-repeat; rotate: -10deg;
+}
+.ys .ys-copy::after {
+  content: ""; position: absolute; pointer-events: none;
+  inset: auto clamp(13px, 3vw, 39px) clamp(10px, 2vw, 25px) auto;
+  width: clamp(84px, 13vw, 175px); height: clamp(55px, 8vw, 100px);
+  background: var(--sticker-bao) right bottom / 65% auto no-repeat,
+              var(--sticker-heart) left 35% / 38% auto no-repeat;
+  filter: var(--sticker-shadow);
+}
+.ys .ys-figure::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  border: 0; opacity: 1;
+  background: var(--sticker-star) 86% 9% / clamp(34px, 5vw, 72px) auto no-repeat,
+              var(--sticker-milk) 10% 72% / clamp(46px, 7vw, 100px) auto no-repeat,
+              var(--sticker-pudding) 89% 75% / clamp(44px, 6.5vw, 90px) auto no-repeat;
+  filter: var(--sticker-shadow);
+}
+.ys .ys-strip > :is(button,a)::before {
+  content: ""; width: 27px; height: 27px; flex: none;
+  background: var(--strip-sticker, var(--sticker-ticket)) center / contain no-repeat;
+}
+.ys .ys-strip > :nth-child(2) { --strip-sticker: var(--sticker-heart); }
+.ys .ys-strip > :nth-child(3) { --strip-sticker: var(--sticker-star); }
+.ys .ys-strip > :nth-child(4) { --strip-sticker: var(--sticker-onigiri); }
+.ys .ys-heading h2 { display: flex; align-items: center; gap: 8px; }
+.ys .ys-heading h2::after {
+  content: ""; width: 35px; height: 35px; flex: none;
+  background: var(--sticker, var(--sticker-ticket)) center / contain no-repeat;
+  transform: rotate(8deg); filter: var(--sticker-shadow);
+}
+.ys .ys-feature .ys-heading h2 { --sticker: var(--sticker-star); }
+.ys .ys-special .ys-index {
+  display: grid; place-items: center; aspect-ratio: 1;
+  border-radius: 42% 47% 45% 48%; background: #f8e4d2;
+  font-size: clamp(26px,3.5vw,46px); transform: rotate(-5deg);
+}
+.ys .ys-special:nth-child(3n+2) .ys-index { background: #e3edfc; color: #3d5d89; }
+.ys .ys-special:nth-child(3n) .ys-index { background: #f8e2eb; }
+.ys .ys-card { position: relative; padding-bottom: 18px; }
+.ys .ys-card::after {
+  content: ""; position: absolute; pointer-events: none;
+  bottom: 9px; inset-inline-end: 12px; width: 38px; height: 38px;
+  background: var(--card-sticker, var(--sticker-heart)) center / contain no-repeat;
+  transform: rotate(8deg);
+}
+.ys .ys-card[data-tier=mid] { --card-sticker: var(--sticker-pudding); }
+.ys .ys-card[data-tier=black] { --card-sticker: var(--sticker-onigiri); }
+.ys .ys-cardtags { min-height: 27px; align-items: center; padding-inline-end: 42px; }
+.ys .ys-random { border-style: dashed; border-color: #fff9efaa; }
+.ys :is(.ys-empty,.ys-pick) {
+  background: #fff3df var(--sticker-rice) calc(100% - 10px) center / 51px auto no-repeat;
+  padding-inline-end: 70px;
+}
+.ys .ys-footer { position: relative; align-items: center; padding-inline-start: 52px; min-height: 70px; }
+.ys .ys-footer::before {
+  content: ""; width: 42px; height: 42px; position: absolute; inset-inline-start: 0;
+  background: var(--sticker-bao) center / contain no-repeat;
+}
+.ys .ys-footer .ys-mono { white-space: nowrap; }
+@media (max-width: 860px) and (min-width: 581px) {
+  .ys .ys-strip > :is(button,a) { gap: 5px; }
+  .ys .ys-strip > :is(button,a)::before { width: 21px; height: 21px; }
+}
+@media (max-width: 580px) {
+  .ys .ys-brand::after { display: none; }
+  .ys .ys-copy::after { width: 95px; height: 52px; inset-inline-end: 15px; bottom: 12px; }
+  .ys .ys-figure::after {
+    background-position: 85% 8%, 6% 75%, 89% 72%;
+    background-size: 33px auto, 44px auto, 41px auto;
+  }
+  .ys .ys-strip > :is(button,a)::before { width: 22px; height: 22px; }
+  .ys .ys-heading h2 { gap: 4px; }
+  .ys .ys-heading h2::after { width: 26px; height: 26px; }
+}
+@media (forced-colors: active) {
+  .ys .ys-card::after, .ys .ys-copy::after, .ys .ys-figure::after { display: none; }
+}
