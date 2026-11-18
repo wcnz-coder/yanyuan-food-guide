@@ -475,3 +475,14 @@ main.ys { background: #fffbf2; color: var(--roast-ink); }
 .ys :is(.ys-deck,.ys-quote,.ys-detail) { font-size: 16px; }
 .ys .ys-quote { font-weight: 600; }
 .ys :is(.ys-special small,.ys-pick small,.ys-footer > span:first-child) { font-size: 14px; }
+
+/* Give dish names clear precedence over the review text without changing the face. */
+.ys :is(.ys-card h3,.ys-special strong) {
+  font-weight: 700;
+  letter-spacing: .018em;
+  line-height: 1.35;
+}
+.ys .ys-card h3 { margin-bottom: 5px; }
+@media (max-width: 350px) {
+  .ys .ys-card h3 { font-size: 20px; }
+}
