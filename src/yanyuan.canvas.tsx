@@ -93,6 +93,14 @@ const tiers = [
 const quick = ["可调辣","不太辣","偏咸","很甜","面粉","饮品","烧烤","甜点","教师之家专场","已下架","仅观感"];
 const pad = (n:number) => String(n).padStart(2,"0");
 const locationOf = (d:typeof dishes[number]) => d.window ? d.place + " · " + d.window : d.place;
+const kindOf = (tags:readonly string[]) =>
+  tags.includes("饮品") ? "drink" :
+  tags.includes("甜点") ? "dessert" :
+  tags.includes("烧烤") ? "bbq" :
+  tags.includes("面粉") ? "noodle" :
+  tags.includes("面包") ? "bread" :
+  tags.includes("小吃") ? "snack" :
+  tags.includes("饭") ? "rice" : "dish";
 const authorAvatar = "__YANYUAN_AUTHOR_AVATAR__";
 const normalizeSearch = (value:string) => value.normalize("NFKC").toLowerCase();
 const compactSearch = (value:string) => normalizeSearch(value).replace(/[^a-z0-9\u3400-\u9fff]+/g,"");
@@ -146,30 +154,138 @@ function termScore(term:string,entry:typeof searchIndex[number]){
   return placeMatch?20+placeMatch*4:0;
 }
 function Icon({name}:{name:string}){
-  return <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-  {name === "save" ? <path d="M6 4h12v16l-6-4-6 4z"/> : name === "search" ? <><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></> : name === "random" ? <><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 8h.01M12 12h.01M16 16h.01M16 8h.01M8 16h.01" strokeWidth="2.6"/></> : name === "close" ? <path d="m6 6 12 12M18 6 6 18"/> : <path d="M4 12h15m-6-6 6 6-6 6"/>}</svg>
+  return <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  {name === "save" ? <path d="M6.5 4.5h11a1.5 1.5 0 0 1 1.5 1.5v14.2l-7-4.4-7 4.4V6a1.5 1.5 0 0 1 1.5-1.5Z"/> : name === "search" ? <><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 4.2 4.2"/></> : name === "random" ? <><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M8.2 8.2h.01M12 12h.01M15.8 15.8h.01M15.8 8.2h.01M8.2 15.8h.01" strokeWidth="2.8"/></> : name === "close" ? <path d="m6.5 6.5 11 11m0-11-11 11"/> : <path d="M4.5 12h14m-5.5-5.5L18.5 12 13 17.5"/>}</svg>
 }
 function Score({score}:{score:number}) {
-  return <span className="ys-score" aria-label={score+" 星"}><span aria-hidden="true">{"★".repeat(score)}<span className="ys-off">{"★".repeat(5-score)}</span></span></span>;
+  return <span className="ys-score" aria-label={score+" 星"}>{[1,2,3,4,5].map(n => <svg key={n} className={"ys-star "+(n<=score?"is-on":"is-off")} viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M12 2.6c.7 0 1.3.4 1.6 1l2 4.1c.2.4.6.7 1 .8l4.5.7c1.4.2 2 2 .9 3l-3.2 3.2c-.3.3-.5.8-.4 1.2l.8 4.5c.2 1.4-1.3 2.5-2.5 1.8l-4-2.1a1.8 1.8 0 0 0-1.6 0l-4 2.1c-1.3.7-2.8-.4-2.5-1.8l.8-4.5c.1-.4-.1-.9-.4-1.2L1.9 12.2c-1-1-.5-2.8 1-3l4.5-.7c.4-.1.8-.4 1-.8l2-4.1c.3-.6.9-1 1.6-1Z"/></svg>)}</span>;
 }
 function Bowl(){
-  return <svg className="ys-bowl" viewBox="0 0 590 380" aria-hidden="true">
-    <g fill="none" stroke="currentColor">
-      <circle cx="331" cy="180" r="153" strokeOpacity=".26" strokeDasharray="2 6"/>
-      <circle cx="331" cy="180" r="167" strokeOpacity=".30"/>
-      <path d="M85 179h32m-16-16v32m376 105h22m-11-11v22m13-205h32m-16-16v32M90 306h15m-7-7v15" strokeWidth="2"/>
-      <path d="M237 119c-24-20 22-27 8-48m33 38c-15-24 31-26 22-48m28 49c-13-22 26-23 20-43" strokeWidth="3.5" strokeLinecap="round"/>
-      <path d="m354 134 169-86 8 9-161 93m-26-23L507 30l8 8-158 106" fill="var(--board)" strokeWidth="3"/>
-      <ellipse cx="303" cy="193" rx="171" ry="62" fill="var(--board)" strokeWidth="4"/>
-      <ellipse cx="303" cy="191" rx="157" ry="48" strokeWidth="2" strokeOpacity=".82"/>
-      <path d="M154 191q16-23 39-18t34-10q15-12 28 2m-67 29 17-7 21 9m-27 11 20-5 13 7m139-38 25-3 14 12 20 3m-55 4 15 7 17-6 22 10m-132-33q10-18 33-14t39 4m-108 21q20-20 43 0t39 1m-95 19q16-19 41-1t51-5m-93 20q15-11 42-1t38-2" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M133 195q19 82 111 118l8 17h102l8-17q92-36 112-118-18 53-171 58-153-5-170-58Z" fill="currentColor" strokeWidth="3.5" strokeLinejoin="round"/>
-      <path d="M154 228q22 51 93 74m-76-61q28 39 82 54m-64-43q29 28 71 38m192-62q-22 51-93 74m76-61q-28 39-82 54m64-43q-29 28-71 38M245 313q56 6 117 0" stroke="var(--board)" strokeWidth="2.2" strokeLinecap="round"/>
-      <path d="M280 279q-7-5-9 1t8 8q16 5 40-10-8 11-25 14-17 5-23-1" stroke="var(--board)" strokeWidth="2.3" strokeLinecap="round"/>
-      <path d="M195 336h215m-182 9h147" strokeOpacity=".45" strokeWidth="2" strokeLinecap="round"/>
+  return <svg className="ys-bowl" viewBox="0 0 560 400" aria-hidden="true">
+    <defs>
+      <radialGradient id="ys-glow" cx="50%" cy="48%" r="50%">
+        <stop offset="0%" stopColor="#fffdf6"/>
+        <stop offset="82%" stopColor="#fff8e3"/>
+        <stop offset="100%" stopColor="#fff3d2" stopOpacity="0"/>
+      </radialGradient>
+      <linearGradient id="ys-bowl-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#f06e5c"/>
+        <stop offset="55%" stopColor="#de5243"/>
+        <stop offset="100%" stopColor="#c43d30"/>
+      </linearGradient>
+      <linearGradient id="ys-broth-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#ffe79e"/>
+        <stop offset="100%" stopColor="#ffd170"/>
+      </linearGradient>
+    </defs>
+    <circle cx="286" cy="198" r="168" fill="url(#ys-glow)"/>
+    <circle cx="286" cy="198" r="144" fill="#fffdf6" stroke="#f0cf92" strokeWidth="2.5" strokeDasharray="7 8"/>
+    <g className="ys-float-a" transform="translate(80 78) rotate(-10)">
+      <path d="M0-25c2.2 0 4.2 1.3 5.2 3.3l5.3 10.6 11.7 1.7c4.5.7 6.3 6.2 3 9.3l-8.5 8.2 2 11.7c.8 4.4-3.9 7.8-7.9 5.7L0 20l-10.8 5.6c-4 2.1-8.7-1.3-7.9-5.7l2-11.7-8.5-8.2c-3.3-3.1-1.5-8.6 3-9.3l11.7-1.7 5.3-10.6C-4.2-23.7-2.2-25 0-25Z" fill="#ffe177" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <circle cx="-6" cy="-1" r="2.2" fill="#4a2e25"/>
+      <circle cx="6" cy="-1" r="2.2" fill="#4a2e25"/>
+      <path d="M-2.8 4.5q2.8 3 5.6 0" fill="none" stroke="#4a2e25" strokeWidth="2.4" strokeLinecap="round"/>
+      <ellipse cx="-11.5" cy="4" rx="3.2" ry="1.8" fill="#ff98a4"/>
+      <ellipse cx="11.5" cy="4" rx="3.2" ry="1.8" fill="#ff98a4"/>
     </g>
-    <text x="47" y="79" fill="currentColor" fontSize="12" fontFamily="monospace" letterSpacing="2">FIG. 01</text>
-    <text x="437" y="353" fill="currentColor" fontSize="12" fontFamily="monospace" letterSpacing="2">LUNCH AT YANYUAN</text>
+    <g className="ys-sparkle" fill="#ff97a6" stroke="#4a2e25" strokeWidth="2.4" strokeLinejoin="round">
+      <path d="M386 78c-6-4-13-10-13-17 0-7 7.5-9.5 13-4 5.5-5.5 13-3 13 4 0 7-7 13-13 17Z"/>
+    </g>
+    <g fill="#f9be52" stroke="#4a2e25" strokeWidth="2" strokeLinejoin="round">
+      <path d="M148 118l4-10 4 10 10 4-10 4-4 10-4-10-10-4Z"/>
+      <path d="M440 190l3-7 3 7 7 3-7 3-3 7-3-7-7-3Z"/>
+    </g>
+    <g className="ys-steam" fill="none" stroke="#fffdf7" strokeWidth="10" strokeLinecap="round" opacity=".88">
+      <path d="M225 112c-12-16 14-24 2-42"/>
+      <path d="M276 98c-14-18 16-26 4-46"/>
+      <path d="M324 114c-11-15 13-22 3-39"/>
+    </g>
+    <g className="ys-steam" fill="none" stroke="#d9a16c" strokeWidth="3.2" strokeLinecap="round">
+      <path d="M225 112c-12-16 14-24 2-42"/>
+      <path d="M276 98c-14-18 16-26 4-46"/>
+      <path d="M324 114c-11-15 13-22 3-39"/>
+    </g>
+    <ellipse cx="286" cy="322" rx="126" ry="20" fill="#edd0a8" opacity=".75"/>
+    <g stroke="#4a2e25" strokeWidth="3.4" strokeLinejoin="round">
+      <path d="M160 176l-18-52c-2-5 1-10 7-11l39-8c5-1 10 2 12 7l17 53Z" fill="#466b4c"/>
+      <path d="M196 164l-11-54c-1-5 3-10 8-11l38-5c5-1 10 3 11 8l11 54Z" fill="#37573d"/>
+      <path d="M161 131l25-5m-21 15l24-5m11-24l24-3m-21 15l23-3" stroke="#638e68" strokeWidth="2.4" strokeLinecap="round"/>
+    </g>
+    <g stroke="#4a2e25" strokeWidth="3.4" strokeLinejoin="round" strokeLinecap="round">
+      <path d="M306 168L498 52c5-3 11 2 9 7l-6 9L316 177Z" fill="#e6a667"/>
+      <path d="M318 182L512 84c5-3 10 3 8 8l-6 8L326 191Z" fill="#d99252"/>
+    </g>
+    <ellipse cx="286" cy="196" rx="146" ry="50" fill="#fff4d8" stroke="#4a2e25" strokeWidth="3.8"/>
+    <ellipse cx="286" cy="198" rx="132" ry="39" fill="url(#ys-broth-grad)" stroke="#4a2e25" strokeWidth="3"/>
+    <g transform="translate(216 184) rotate(-14)">
+      <ellipse cx="0" cy="0" rx="34" ry="24" fill="#fffdf8" stroke="#4a2e25" strokeWidth="3.2"/>
+      <ellipse cx="4" cy="2" rx="18" ry="13" fill="#ff9445" stroke="#4a2e25" strokeWidth="2.8"/>
+      <ellipse cx="-2" cy="-2" rx="5" ry="3" fill="#ffd29d" transform="rotate(-18 -2 -2)"/>
+    </g>
+    <g transform="translate(362 182) rotate(12)">
+      <path d="M0-25c5 0 7 4 11 5s8-1 11 3 1 8 3 12 6 6 5 11-5 6-6 10 2 8-2 11-8 0-12 2-6 5-10 5-7-4-11-5-8 1-11-3-1-8-3-12-6-6-5-11 5-6 6-10-2-8 2-11 8 0 12-2 6-5 10-5Z" fill="#fffdf8" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <path d="M-2-2c2-4 8-3 8 2 0 6-7 10-13 8-8-2-10-12-5-18 6-7 18-6 22 3" fill="none" stroke="#f27a92" strokeWidth="3.4" strokeLinecap="round"/>
+    </g>
+    <g fill="none" stroke="#4a2e25" strokeWidth="8.5" strokeLinecap="round">
+      <path d="M278 194c-10-26 10-38 28-44"/>
+      <path d="M294 198c-6-26 12-40 28-44"/>
+      <path d="M310 202c-2-24 14-36 28-40"/>
+      <path d="M236 210c14-10 34 6 50-4s30 6 46-4"/>
+    </g>
+    <g fill="none" stroke="#ffd25e" strokeWidth="4.2" strokeLinecap="round">
+      <path d="M278 194c-10-26 10-38 28-44"/>
+      <path d="M294 198c-6-26 12-40 28-44"/>
+      <path d="M310 202c-2-24 14-36 28-40"/>
+      <path d="M236 210c14-10 34 6 50-4s30 6 46-4"/>
+    </g>
+    <g fill="#73b86d" stroke="#4a2e25" strokeWidth="2.4">
+      <ellipse cx="264" cy="176" rx="8" ry="5" transform="rotate(-12 264 176)"/>
+      <ellipse cx="326" cy="212" rx="8" ry="5" transform="rotate(15 326 212)"/>
+      <ellipse cx="242" cy="216" rx="7" ry="4.5" transform="rotate(-8 242 216)"/>
+    </g>
+    <path d="M228 298h116l-8 24c-2 6-8 9-14 9h-72c-6 0-12-3-14-9Z" fill="#fff4d8" stroke="#4a2e25" strokeWidth="3.8" strokeLinejoin="round"/>
+    <path d="M140 198c6 78 65 114 146 114s140-36 146-114c-30 27-86 38-146 38s-116-11-146-38Z" fill="url(#ys-bowl-grad)" stroke="#4a2e25" strokeWidth="3.8" strokeLinejoin="round"/>
+    <path d="M146 214c34 24 84 34 140 34s106-10 140-34l-3 18c-32 22-82 32-137 32s-105-10-137-32Z" fill="#fff5da" stroke="#4a2e25" strokeWidth="3" strokeLinejoin="round"/>
+    <path d="M168 252c9 17 24 30 43 38" fill="none" stroke="#ff9c8e" strokeWidth="5.5" strokeLinecap="round" opacity=".68"/>
+    <g>
+      <ellipse cx="255" cy="272" rx="6.2" ry="7.2" fill="#4a2e25"/>
+      <circle cx="253" cy="269.5" r="2.2" fill="#fffdf8"/>
+      <ellipse cx="317" cy="272" rx="6.2" ry="7.2" fill="#4a2e25"/>
+      <circle cx="315" cy="269.5" r="2.2" fill="#fffdf8"/>
+      <ellipse cx="238" cy="281" rx="9.5" ry="5.5" fill="#ffa0ad" opacity=".88"/>
+      <ellipse cx="334" cy="281" rx="9.5" ry="5.5" fill="#ffa0ad" opacity=".88"/>
+      <path d="M275 278c3 7 11 7 11 0 0 7 8 7 11 0" fill="none" stroke="#4a2e25" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    <g className="ys-float-a" transform="translate(78 272) rotate(-7)">
+      <path d="M-24-12h42v48h-42Z" fill="#bfe0ff" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <path d="M-24-12l10-18h24l8 18Z" fill="#fff7e2" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <path d="M-14-38h24v8h-24Z" fill="#fff7e2" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <path d="M10-30l8 18v48h10v-48l-10-18Z" fill="#e5f2ff" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <circle cx="-11" cy="10" r="2.4" fill="#4a2e25"/>
+      <circle cx="5" cy="10" r="2.4" fill="#4a2e25"/>
+      <path d="M-6 17q3 3.5 6 0" fill="none" stroke="#4a2e25" strokeWidth="2.4" strokeLinecap="round"/>
+      <ellipse cx="-16" cy="16" rx="3.4" ry="2" fill="#ff98a4"/>
+      <ellipse cx="10" cy="16" rx="3.4" ry="2" fill="#ff98a4"/>
+    </g>
+    <g className="ys-float-b" transform="translate(474 282) rotate(7)">
+      <path d="M-36 18h72c-4 10-18 14-36 14s-32-4-36-14Z" fill="#ffd2dc" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <path d="M-18-24h36l13 42h-62Z" fill="#ffe188" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <path d="M-18-24c0-5 36-5 36 0l4 13c-6 2-9-5-13-2-5 6-8-2-13 1-5 4-9 0-14 2Z" fill="#d98a4e" stroke="#4a2e25" strokeWidth="3.2" strokeLinejoin="round"/>
+      <path d="M0-28l4-10" stroke="#4a2e25" strokeWidth="2.8" strokeLinecap="round"/>
+      <circle cx="7" cy="-39" r="6" fill="#ec5b67" stroke="#4a2e25" strokeWidth="2.8"/>
+      <circle cx="5" cy="-41" r="1.8" fill="#fffdf8"/>
+      <circle cx="-9" cy="1" r="2.5" fill="#4a2e25"/>
+      <circle cx="9" cy="1" r="2.5" fill="#4a2e25"/>
+      <path d="M-4 7.5q4 3.5 8 0" fill="none" stroke="#4a2e25" strokeWidth="2.4" strokeLinecap="round"/>
+      <ellipse cx="-15" cy="7" rx="3.6" ry="2" fill="#ff98a4"/>
+      <ellipse cx="15" cy="7" rx="3.6" ry="2" fill="#ff98a4"/>
+    </g>
+    <g transform="translate(286 364)">
+      <rect x="-126" y="-15" width="252" height="30" rx="15" fill="#fffdf8" stroke="#4a2e25" strokeWidth="2.5"/>
+      <circle cx="-108" cy="0" r="4" fill="#ec6252"/>
+      <circle cx="108" cy="0" r="4" fill="#73b86d"/>
+      <text x="0" y="4.5" textAnchor="middle" fill="#4a2e25" fontSize="11.5" fontWeight="800" letterSpacing="1.1" fontFamily='"PingFang SC","Microsoft YaHei",sans-serif'>YANYUAN BENTO · 干饭时间</text>
+    </g>
   </svg>;
 }
 const css = `
@@ -346,8 +462,8 @@ export default function YanyuanFoodGuide(){
           {isFiltered&&<button className="ys-reset" onClick={reset}>清空筛选</button>}
           <button className="ys-random" onClick={roll} disabled={!picks.length} title="只从当前筛选结果的四、五星菜里抽；已下架的不参与"><Icon name="random"/>红榜随机点</button>
         </div></div>
-        {pick&&<div className="ys-pick" role="status"><div><small>这一顿抽到 · {locationOf(pick)} · {pick.score} 星</small><strong>{pick.name}</strong><small>{pick.quote}</small></div><button aria-label="关闭随机推荐" onClick={()=>setPickId(null)}><Icon name="close"/></button></div>}
-        {filtered.length ? <div className="ys-grid">{filtered.map(d=><article className="ys-card" key={d.id} data-tier={d.score>=4?"red":d.score===3?"mid":"black"}>
+        {pick&&<div className="ys-pick" key={pick.id} role="status"><div><small>今日幸运抽签 · {locationOf(pick)} · {pick.score} 星</small><strong>{pick.name}</strong><small>{pick.quote}</small></div><button aria-label="关闭随机推荐" onClick={()=>setPickId(null)}><Icon name="close"/></button></div>}
+        {filtered.length ? <div className="ys-grid">{filtered.map(d=><article className="ys-card" key={d.id} data-tier={d.score>=4?"red":d.score===3?"mid":"black"} data-kind={kindOf(d.tags)}>
           <div className="ys-cardtop"><span className="ys-local">{locationOf(d)}</span><button className="ys-book" aria-label={(saved.includes(d.id)?"取消收藏 ":"收藏 ")+d.name} aria-pressed={saved.includes(d.id)} onClick={()=>setSaved(prev=>prev.includes(d.id)?prev.filter(x=>x!==d.id):[...prev,d.id])}><Icon name="save"/></button></div>
           <h3>{d.name}</h3><Score score={d.score}/><p className="ys-quote">{d.quote}</p>{d.detail&&<p className="ys-detail">{d.detail}</p>}
           <div className="ys-cardtags">{d.tags.map(q=><span className={q==="已下架"||q==="仅观感"?"ys-unavailable":undefined} key={q}>{q}</span>)}</div>
