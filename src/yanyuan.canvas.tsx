@@ -469,7 +469,7 @@ export default function YanyuanFoodGuide(){
           <div className="ys-cardtags">{d.tags.map(q=><span className={q==="已下架"||q==="仅观感"?"ys-unavailable":undefined} key={q}>{q}</span>)}</div>
         </article>)}</div> : <div className="ys-empty">{savedOnly&&!saved.length?"还没收藏。点一道菜右上角的书签，就能把它留在这里。":"这组筛选没有匹配，换个关键词或放宽条件。"} <button onClick={reset}>回到全榜</button></div>}
       </section>
-      <footer className="ys-footer"><span>只收录这次提供的试吃笔记。星级和口味都是个人感受，未核验窗口现状。</span><span className="ys-mono">END / 01</span></footer>
+      <footer className="ys-footer"><span>燕园试吃手记 · 今天也要好好吃饭。</span><span className="ys-mono">END / 01</span></footer>
     </div>
     <style>{css}</style>
   </main>;
